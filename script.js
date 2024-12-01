@@ -141,7 +141,7 @@ function showNotification(message) {
     if (Notification.permission === 'granted') {
         new Notification('Printer Update', {
             body: message,
-            icon: 'icons/formalertlogo.png', // Replace with your icon path
+            icon: 'icons/formAlertlogo.png', // Replace with your icon path
         });
     }
 }
