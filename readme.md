@@ -8,4 +8,4 @@ This Progressive Web App (PWA) utilizes the Formlabs Web API to display the stat
 - Push notifications for printer status changes
 - Installable everywhere!
 
-made with 
+made with ❤️ by Elias Prountzos
