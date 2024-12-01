@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formAlert</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+    <header class="header">
+        <!-- Logo -->
+        <img src="icons/formAlertlogo.png" alt="formAlert Logo" class="logo">
+
+        <!-- Title -->
+        <h1>formAlert</h1>
+
+        <!-- Description -->
+        <p class="description">Push notifications for your Formlabs printers
+            <br>Keys are saved locally, we do not read any of that<br>
+            <p class="description"> to acquire your own visit
+                <a href="https://dashboard.formlabs.com/#developer"target="_blank">here
+
+            </a>
+        </p>
+      
+    </header>
+
+    <main>
+        <div class="form-container">
+            <form id="authForm">
+                <input type="text" id="clientId" placeholder="Enter your Client ID" required>
+                <input type="password" id="clientSecret" placeholder="Enter your Client Secret" required>
+                <button id="saveKeysButton" class="btn btn-primary">Save Keys</button>
+            </form>
+
+            <button id="fetchDataButton" class="btn btn-secondary" style="display: none;">Fetch Data</button>
+
+            <div id="printerStatus" class="printers-list"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="description">Made with ❤️ by Elias Prountzos</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
