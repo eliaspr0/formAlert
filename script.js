@@ -1,3 +1,6 @@
+import { inject } from '@vercel/analytics';
+inject();
+
 // Load credentials from localStorage on page load
 document.addEventListener('DOMContentLoaded', () => {
     const savedClientId = localStorage.getItem('clientId');
