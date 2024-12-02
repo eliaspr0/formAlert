@@ -8,6 +8,6 @@ This Progressive Web App utilizes the Formlabs Web API to display the status of 
 - Push notifications for printer status changes
 - Installable everywhere!
 
-[formAlert](eliaspr0.github.io/formAlert)
+[formAlert](https://eliaspr0.github.io/formAlert/)
 
 made with ❤️ by Elias Prountzos
