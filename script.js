@@ -175,7 +175,7 @@ async function startLongPolling() {
         displayPrinters(printers);
 
         // Continue polling after a delay
-        setTimeout(poll, 300000); // 5-minute polling interval
+        setTimeout(poll, 60000); // 1-minute polling interval
     };
 
     poll();
