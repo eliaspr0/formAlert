@@ -165,7 +165,7 @@ async function startLongPolling() {
             const currentStatus = printer.printer_status.status || 'Unknown Status';
 
             if (previousStatuses[printerSerial] && previousStatuses[printerSerial] !== currentStatus) {
-                showNotification(`Printer ${printerSerial} is now: ${currentStatus}`);
+                showNotification(`${printerSerial} is now: ${currentStatus}`);
             }
 
             // Update the status cache
