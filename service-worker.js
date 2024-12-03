@@ -1,4 +1,4 @@
-const CACHE_NAME = 'formlabs-pwa-cache-v2'; // Update the cache name for versioning
+const CACHE_NAME = 'formlabs-pwa-cache-v2';
 const urlsToCache = ['/', '/styles.css'];
 
 self.addEventListener('install', event => {
@@ -10,9 +10,8 @@ self.addEventListener('install', event => {
     );
 });
 
-// Activate event to clean up old caches
 self.addEventListener('activate', event => {
-    const cacheWhitelist = [CACHE_NAME]; // List of valid cache names
+    const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(

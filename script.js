@@ -1,4 +1,3 @@
-
 // Load credentials from localStorage on page load
 document.addEventListener('DOMContentLoaded', () => {
     const savedClientId = localStorage.getItem('clientId');
@@ -19,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Check notification permissions
+    document.getElementById('enableNotificationsButton').addEventListener('click', () => {
+        requestNotificationPermission();
+    });
+
     checkNotificationPermission();
 });
 
@@ -39,18 +42,10 @@ function checkNotificationPermission() {
             alert(
                 "Notifications are blocked. Please enable them in your browser settings for the app to work properly."
             );
-            // Keep prompting for permissions
-            requestNotificationPermission();
             break;
         case "default":
-            // User hasn't responded yet or status reset
-            if (!notificationStatus || notificationStatus === 'default') {
-                console.log("User has not responded to the notification prompt. Prompting now...");
-                requestNotificationPermission();
-            } else if (notificationStatus === 'denied') {
-                console.log("User denied notifications previously. Prompting again...");
-                requestNotificationPermission();
-            }
+            console.log("User has not responded to the notification prompt.");
+            // Allow user to request notifications manually via the button
             break;
     }
 }
@@ -69,8 +64,6 @@ function requestNotificationPermission() {
         }
     });
 }
-
-
 
 // Add Fetch Data button event listener
 document.getElementById('fetchDataButton').addEventListener('click', () => {
@@ -109,7 +102,7 @@ async function fetchPrinters(token) {
 
 // Map machine_type_id to icons
 const machineTypeIcons = {
-    "type1": "icon1.png", // Replace with your actual machine_type_id and icon paths
+    "type1": "icon1.png",
     "FORM-2-0": "icons/form2.svg",
     "FORM-3-2": "icons/form3.svg",
     "FORM-4-0": "icons/form4.svg",
@@ -123,8 +116,8 @@ function displayPrinters(printers) {
     printers.forEach(printer => {
         const printerSerial = printer.serial || 'Unknown Serial';
         const printerStatus = printer.printer_status.status || 'Unknown Status';
-        const machineType = printer.machine_type_id || 'default'; // Fallback to 'default' if machine_type_id is missing
-        const iconUrl = machineTypeIcons[machineType] || machineTypeIcons['default']; // Get the corresponding icon
+        const machineType = printer.machine_type_id || 'default';
+        const iconUrl = machineTypeIcons[machineType] || machineTypeIcons['default'];
 
         const printerHtml = `
             <div class="printer-item">
@@ -141,7 +134,7 @@ function showNotification(message) {
     if (Notification.permission === 'granted') {
         new Notification('Printer Update', {
             body: message,
-            icon: 'icons/formAlertlogo.png', // Replace with your icon path
+            icon: 'icons/formAlertlogo.png',
         });
     }
 }
@@ -183,15 +176,13 @@ async function startLongPolling() {
 
 // Get Authentication Token
 async function getAuthToken(clientId, clientSecret) {
-    // Check if token exists in localStorage and if it is expired
     let storedToken = localStorage.getItem('authToken');
     let tokenExpiry = localStorage.getItem('tokenExpiry');
 
     if (storedToken && tokenExpiry && new Date().getTime() < tokenExpiry) {
-        return storedToken; // Return valid token
+        return storedToken;
     }
 
-    // Otherwise, request a new token
     try {
         const response = await fetch('https://api.formlabs.com/developer/v1/o/token/', {
             method: 'POST',
@@ -205,9 +196,8 @@ async function getAuthToken(clientId, clientSecret) {
 
         const data = await response.json();
         if (data.access_token) {
-            // Save new auth token and expiration time (24 hours)
             localStorage.setItem('authToken', data.access_token);
-            const expiryDate = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+            const expiryDate = new Date().getTime() + 24 * 60 * 60 * 1000;
             localStorage.setItem('tokenExpiry', expiryDate);
             return data.access_token;
         } else {
